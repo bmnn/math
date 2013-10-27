@@ -1,3 +1,6 @@
+# vim
+*.swp
+
 # what GitHub suggests for latex
 *.acn
 *.acr
