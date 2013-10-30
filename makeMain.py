@@ -5,24 +5,34 @@ import subprocess
 filename = sys.argv[1]
 # filename is expected as parameter
 opfile = sys.argv[1] + '.tex'
-outfile = open(opfile, 'w')
 
-cnt = [];
+
+## if file exists, delete it ##
+if os.path.isfile(opfile):
+	        os.remove(opfile)
+
+
+file = open('pre.tex', 'r')
+doc = file.readlines()
+
 cmd = 'git status --porcelain' # Machine friendly output
-# cmd = 'git status'
-cnt.append('\\vskip2em\n\\font\\titlefont=cmr12 at 14.4pt\n\\font\\default=cmr12\n')
-cnt.append('\\def\\today{January 21, 2011}\n')
-cnt.append('\\centerline{\\titlefont ' + 'Git status of working directory' + '}')
 proc = subprocess.Popen(cmd,shell = True, stdout=subprocess.PIPE)
 for line in iter(proc.stdout.readline, ''):
-    cnt.append(line + '\n')
-cnt.append('\n\\bye')
+    if '.tex' in line and not 'main.tex' in line:
+        doc.append('\\input{' + line.replace('?? ', '').replace(' M ','').rstrip('\n') + '}\n')
 
 
-for i in cnt:
+file = open('post.tex', 'r')
+for f in file.readlines():
+    doc.append(f)
+
+
+
+outfile = open(opfile, 'w')
+for i in doc:
     outfile.writelines(i)
 outfile.close()
 # Compile
-os.system('tex '+ opfile)
+os.system('pdflatex '+ opfile)
 # View
-os.system('xdvi ' + filename + '.dvi & ')
+# os.system('okular ' + filename + '.pdf & ')
