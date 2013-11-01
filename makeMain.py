@@ -15,9 +15,17 @@ if os.path.isfile(opfile):
 file = open('pre.tex', 'r')
 doc = file.readlines()
 
-cmd = 'git status --porcelain' # Machine friendly output
-proc = subprocess.Popen(cmd,shell = True, stdout=subprocess.PIPE)
-for line in iter(proc.stdout.readline, ''):
+cmd = ['git', 'status', '--porcelain'] # Machine friendly output
+
+
+def run_command(command):
+    p = subprocess.Popen(command,
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.STDOUT)
+    return [a.decode('UTF-8') for a in iter(p.stdout.readline, b'')]
+
+# proc = subprocess.Popen(cmd,shell = True, stdout=subprocess.PIPE)
+for line in run_command(cmd):
     if '.tex' in line and not 'main.tex' in line:
         doc.append('\\input{' + line.replace('?? ', '').replace(' M ','').rstrip('\n') + '}\n')
 
