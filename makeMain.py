@@ -6,13 +6,14 @@ filename = sys.argv[1]
 # filename is expected as parameter
 opfile = sys.argv[1] + '.tex'
 
+bD = os.environ.get('HOME') + '/math/'
 
 ## if file exists, delete it ##
 if os.path.isfile(opfile):
 	        os.remove(opfile)
 
 
-file = open('pre.tex', 'r')
+file = open(bD + 'pre.tex', 'r')
 doc = file.readlines()
 
 cmd = ['git', 'status', '--porcelain'] # Machine friendly output
@@ -26,21 +27,21 @@ def run_command(command):
 
 # proc = subprocess.Popen(cmd,shell = True, stdout=subprocess.PIPE)
 for line in run_command(cmd):
-    if '.tex' in line and not 'main.tex' in line:
-        doc.append('\\input{' + line.replace('?? ', '').replace(' M ','').rstrip('\n') + '}\n')
+    if '.tex' in line and not 'main.tex' in line and not 'view.tex' in line:
+        doc.append('\\input{' + bD + line.replace('?? ', '').replace(' M ','').rstrip('\n') + '}\n')
 
 
-file = open('post.tex', 'r')
+file = open(bD + 'post.tex', 'r')
 for f in file.readlines():
     doc.append(f)
 
 
 
-outfile = open(opfile, 'w')
+outfile = open(bD + opfile, 'w')
 for i in doc:
     outfile.writelines(i)
 outfile.close()
 # Compile
-os.system('pdflatex '+ opfile)
+os.system('pdflatex '+ bD + opfile)
 # View
 # os.system('okular ' + filename + '.pdf & ')
