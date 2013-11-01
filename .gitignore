@@ -1,6 +1,10 @@
 # vim
 *.swp
 
+# automatically created files
+    # preview
+view.tex
+
 # what GitHub suggests for latex
 *.acn
 *.acr
