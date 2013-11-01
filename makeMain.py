@@ -26,7 +26,7 @@ def run_command(command):
 
 # proc = subprocess.Popen(cmd,shell = True, stdout=subprocess.PIPE)
 for line in run_command(cmd):
-    if '.tex' in line and not 'main.tex' in line:
+    if '.tex' in line and not 'main.tex' in line and not 'view.tex' in line:
         doc.append('\\input{' + line.replace('?? ', '').replace(' M ','').rstrip('\n') + '}\n')
 
 
