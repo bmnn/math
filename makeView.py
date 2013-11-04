@@ -7,6 +7,11 @@ fN = sys.argv[1] + '.tex'
 bD = os.environ.get('HOME') + '/math/'
 oF = 'view.tex'
 
+
+# ## if file exists, delete it ##
+# if os.path.isfile(opfile):
+# 	        os.remove(opfile)
+# 
 file = open(bD + 'pre.tex', 'r')
 doc = file.readlines()
  

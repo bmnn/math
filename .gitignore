@@ -2,8 +2,9 @@
 *.swp
 
 # automatically created files
-# preview
+    # preview
 view.tex
+
 # what GitHub suggests for latex
 *.acn
 *.acr
