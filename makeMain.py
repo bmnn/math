@@ -17,6 +17,9 @@ if os.path.isfile(opfile):
 file = open(bD + 'pre.tex', 'r')
 doc = file.readlines()
 
+file = open(bD + 'cf.tex', 'r')
+doc = doc + file.readlines();
+
 cmd = ['git', 'status', '--porcelain'] # Machine friendly output
 
 
@@ -25,13 +28,12 @@ def run_command(command):
                          stdout=subprocess.PIPE,
                          stderr=subprocess.STDOUT)
     return [a.decode('UTF-8').replace('\n', '') for a in iter(p.stdout.readline, b'')]
-
 gO = run_command(cmd);
 # regexp and lambda function to remove git status flags
 gS = re.compile('[AM?]+[ ]+')
 sGS = lambda f : re.sub(gS, '', f)
 # take all tex files except some exeptions
-eF = lambda f:  ('.tex' in f) and not ('main.tex' in f) and not ('.sw' in f) and not ('D ' in f);
+eF = lambda f:  ('.tex' in f) and not ('main.tex' in f or 'cf.tex' in f) and not ('.sw' in f) and not ('D ' in f);
 f = [sGS(f) for f in gO if eF(f)];
 for i in f:
         doc.append('\\input{%s}\n' % i)

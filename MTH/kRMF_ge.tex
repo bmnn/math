@@ -1,0 +1,9 @@
+% [p. 812]
+% Kettenregel fuer mehrdimensionale Funktionen
+Fuer die beiden ueber offenen Mengen $\mathcal{X}, \mathcal{Y}$ definierten Funktionen
+$$\operatorname{f} : \mathcal{X} \subset \mathbb{R}^n \to \mathbb{R}^q$$ 
+$$\operatorname{g} : \mathcal{Y} \subset \mathbb{R}^q \to \mathbb{R}^m, \operatorname{f}(\mathcal{X}) \subset \mathcal{Y}$$
+wobei $\operatorname{f}$ im Punkt $p$ und $\operatorname{g}$ im Punkt $q = \operatorname{f}(p)$ differenzierbar ist, ist die Funktion
+$$\operatorname{h} : \mathcal{X} \to \mathbb{R}^m$$ 
+mit $\operatorname{h} = \operatorname{g} \circ \operatorname{f}$ differenzierbar und es gilt
+$$\frac{\partial (\operatorname{h}_1, \dots \operatorname{h}_m)}{\partial (x_1, \dots, x_n)} \bigg|_p = \frac{\partial (\operatorname{g}_1, \dots \operatorname{g}_m)}{\partial (y_1, \dots, y_q)} \bigg|_q  \frac{\partial (\operatorname{f}_1, \dots \operatorname{f}_q)}{\partial (x_1, \dots, x_n)} \bigg|_p$$ 
