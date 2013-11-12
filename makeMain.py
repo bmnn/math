@@ -36,7 +36,7 @@ sGS = lambda f : re.sub(gS, '', f)
 eF = lambda f:  ('.tex' in f) and not ('main.tex' in f or 'cf.tex' in f) and not ('.sw' in f) and not ('D ' in f);
 f = [sGS(f) for f in gO if eF(f)];
 for i in f:
-        doc.append('\\input{%s}\n' % i)
+        doc.append('\\input{%s} \\ \\\\\n' % i)
 
 
 file = open(bD + 'post.tex', 'r')
